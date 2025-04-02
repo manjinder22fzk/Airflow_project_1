@@ -66,7 +66,8 @@ with DAG(
                 "--conf", "spark.executor.instances=1",      # Only 1 executor
                 "--conf", "spark.executor.cores=2",         # 2 vCPUs per executor
                 "--conf", "spark.driver.cores=2",           # 2 vCPUs for driver
-                # Total: 2 (driver) + 2 (executor) = 4 vCPUs (well under 8)
+                "--conf", "spark.dynamicAllocation.enabled=false",  # Disable auto-scaling
+                "--conf", "spark.dataproc.resourceAllocationPolicy=NONE"  # Prevent Dataproc from overriding your settings
                 
                 # Memory limits to reinforce constraints
                 "--conf", "spark.executor.memory=2g",
