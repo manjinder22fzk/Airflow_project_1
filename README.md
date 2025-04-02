@@ -12,6 +12,9 @@
 
 ---
 
+
+![ChatGPT Image Apr 2, 2025, 04_20_42 PM](https://github.com/user-attachments/assets/210f741a-1822-40b5-985b-3a1d308d4fbf)
+
 ## ⚙️ Technical Deep Dive
 
 ### 🔄 A. Data Flow
