@@ -68,6 +68,7 @@ with DAG(
         },
         "environment_config": {
             "execution_config": {
+                "machine_type": "e2-standard-2",
                 "service_account": "745219382502-compute@developer.gserviceaccount.com",
                 "network_uri": "projects/airflow-shashank/global/networks/default",
                 "subnetwork_uri": "projects/airflow-shashank/regions/europe-north1/subnetworks/default",
