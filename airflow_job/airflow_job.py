@@ -62,28 +62,38 @@ with DAG(
                 f"--route_insights_table={route_insights_table}",
                 f"--origin_insights_table={origin_insights_table}",
 
-                "--conf", "spark.executor.instances=1",
-                "--conf", "spark.executor.cores=2",
-                "--conf", "spark.driver.cores=2",
-                "--conf", "spark.executor.memory=2g",
-                "--conf", "spark.driver.memory=2g",
-                "--conf", "spark.dynamicAllocation.enabled=false",  
-                "--conf", "spark.executor.memoryOverhead=512m",  
-                "--conf", "spark.driver.memoryOverhead=512m",  
-                "--conf", "spark.dataproc.allow.zero.workers=true",
-                "--conf", "spark.dataproc.resourceAllocationPolicy=NONE",  # Enforce manual allocation  
-                "--conf", "spark.yarn.executor.memoryOverhead=512m"  
+                # "--conf", "spark.executor.instances=1",
+                # "--conf", "spark.executor.cores=2",
+                # "--conf", "spark.driver.cores=2",
+                # "--conf", "spark.executor.memory=2g",
+                # "--conf", "spark.driver.memory=2g",
+                # "--conf", "spark.dynamicAllocation.enabled=false",  
+                # "--conf", "spark.executor.memoryOverhead=512m",  
+                # "--conf", "spark.driver.memoryOverhead=512m",  
+                # "--conf", "spark.dataproc.allow.zero.workers=true",
+                # "--conf", "spark.dataproc.resourceAllocationPolicy=NONE",  # Enforce manual allocation  
+                # "--conf", "spark.yarn.executor.memoryOverhead=512m"  
 
             ]
         },
         "runtime_config": {
-            "version": "2.2",  # Specify Dataproc version (if needed)
+            "version": "2.2",  # Specify Dataproc version (if needed),
+            "container_image": "europe-docker.pkg.dev/cloud-dataproc/spark/spark-2.4:2.4"
         },
         "environment_config": {
             "execution_config": {
                 "service_account": "745219382502-compute@developer.gserviceaccount.com",
                 "network_uri": "projects/airflow-shashank/global/networks/default",
                 "subnetwork_uri": "projects/airflow-shashank/regions/europe-north1/subnetworks/default",
+                # HARD LIMITS ▼
+                "min_cpu_platform": "Automatic",
+                "kms_key": "",  # Required field (can be empty)
+                "network_tags": ["low-resource-job"],  # Helps identify
+                "metadata": {
+                    "spark-serverless-enforcement": "true",
+                    "max-vcpu": "4",  # Hard cap (2 driver + 2 executor)
+                    "max-memory-gb": "8"  # 4GB per core
+                }
             }
         },
     }
