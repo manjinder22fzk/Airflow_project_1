@@ -62,16 +62,18 @@ with DAG(
                 f"--route_insights_table={route_insights_table}",
                 f"--origin_insights_table={origin_insights_table}",
 
-                # Strict CPU limits
-                "--conf", "spark.executor.instances=1",      # Only 1 executor
-                "--conf", "spark.executor.cores=2",         # 2 vCPUs per executor
-                "--conf", "spark.driver.cores=2",           # 2 vCPUs for driver
-                "--conf", "spark.dynamicAllocation.enabled=false",  # Disable auto-scaling
-                "--conf", "spark.dataproc.resourceAllocationPolicy=NONE"  # Prevent Dataproc from overriding your settings
-                
-                # Memory limits to reinforce constraints
+                "--conf", "spark.executor.instances=1",
+                "--conf", "spark.executor.cores=2",
+                "--conf", "spark.driver.cores=2",
                 "--conf", "spark.executor.memory=2g",
-                "--conf", "spark.driver.memory=2g"
+                "--conf", "spark.driver.memory=2g",
+                "--conf", "spark.dynamicAllocation.enabled=false",  
+                "--conf", "spark.executor.memoryOverhead=512m",  
+                "--conf", "spark.driver.memoryOverhead=512m",  
+                "--conf", "spark.dataproc.allow.zero.workers=true",
+                "--conf", "spark.dataproc.resourceAllocationPolicy=NONE",  # Enforce manual allocation  
+                "--conf", "spark.yarn.executor.memoryOverhead=512m"  
+
             ]
         },
         "runtime_config": {
