@@ -78,7 +78,7 @@ with DAG(
         },
         "runtime_config": {
             "version": "2.2",  # Specify Dataproc version (if needed),
-            "container_image": "europe-docker.pkg.dev/cloud-dataproc/spark/spark-2.4:2.4"
+            "container_image": "europe-docker.pkg.dev/cloud-dataproc/spark/spark-3.4:latest"
         },
         "environment_config": {
             "execution_config": {
