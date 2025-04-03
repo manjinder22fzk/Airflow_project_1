@@ -1,0 +1,11 @@
+{
+    "env": "prod",
+    "gcs_bucket": "money_airflow-projects-gds",
+    "bq_project": "airflow-shashank",
+    "bq_dataset": "flight_data_prod",
+    "tables": {
+      "transformed_table": "transformed_flight_data_prod",
+      "route_insights_table": "route_insights_prod",
+      "origin_insights_table": "origin_insights_prod"
+    }
+  }
